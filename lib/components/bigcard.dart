@@ -22,7 +22,7 @@ class Bigcard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: width,
-      height: height,
+      height: height ?? double.infinity,
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
@@ -37,7 +37,7 @@ class Bigcard extends StatelessWidget {
                 child: Image.network(
                   imageUrl!,
                   width: double.infinity,
-                  height: 200,
+                  height: height != null ? height! * 0.6 : null,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -52,19 +52,19 @@ class Bigcard extends StatelessWidget {
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
-                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: 10),
-                  Text(
-                    description,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[600],
+                  if (imageUrl == null)
+                    Text(
+                      description,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600],
+                      ),
+                      maxLines: 3,
+                      overflow: TextOverflow.clip,
                     ),
-                    maxLines: 5,
-                    overflow: TextOverflow.ellipsis,
-                  ),
                 ],
               ),
             ),
