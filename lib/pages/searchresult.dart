@@ -7,11 +7,10 @@ import 'package:newsapi/components/bigcard.dart';
 Future<List<dynamic>> fetchSearchResults(String query) async {
   var url = 'https://newsapi.org/v2/everything?' +
       'q=${query}&' +
-      'sortBy=popularity&' +
+      'sortBy=relevancy&' +
       'pageSize=20&' +
       'language=en&' +
       'apiKey=4da6ba9a02184b3ca6cd1c6f2173054e';
-
   final response = await http.get(Uri.parse(url));
   print('Fetching from URL: $url');
 
@@ -43,8 +42,14 @@ class SearchResult extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarTextStyle: TextStyle(
+          color: Colors.white,
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
         title: Text(
-          'Search Results',
+          'Search Results $query',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.blue,

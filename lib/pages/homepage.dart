@@ -68,7 +68,10 @@ class Homepage extends StatelessWidget {
           backgroundColor: Colors.blue,
         ),
         body: FutureBuilder<Map<String, List<dynamic>>>(
-          future: fetchAllNews(['software', 'education']),
+          future: fetchAllNews([
+            'software',
+            'education',
+          ]),
           builder: (context, snapshot) {
             // If the future is still loading
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -89,7 +92,7 @@ class Homepage extends StatelessWidget {
               }
 
               return Scaffold(
-                body: Container(
+                body: SingleChildScrollView(
                   child: Column(
                     children: [
                       // Search Input
@@ -102,15 +105,30 @@ class Homepage extends StatelessWidget {
                               Expanded(
                                 child: TextFormField(
                                   controller: _controller,
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                  ),
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
                                     labelText: 'Search subject',
+                                    labelStyle: TextStyle(color: Colors.blue),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.blue),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.blue),
+                                    ),
                                   ),
                                 ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
+                                  style: ButtonStyle(
+                                      foregroundColor:
+                                          WidgetStatePropertyAll(Colors.blue)),
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
                                       Navigator.push(
@@ -154,6 +172,7 @@ class Homepage extends StatelessWidget {
                                           'No description',
                                       imageUrl: article['urlToImage'],
                                       href: article['url'],
+                                      content: article['content'],
                                       width: 300,
                                       height: 300,
                                     );
